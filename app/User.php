@@ -14,9 +14,14 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, Billable;
 
+    /** @var array $casts The attributes that should be cast to native types. */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
     /** @var array $fillable The attributes that are mass assignable. */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'username', 'password',
     ];
 
     /** @var array $hidden The attributes that should be hidden for arrays. */
@@ -24,8 +29,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
-    /** @var array $casts The attributes that should be cast to native types. */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    /**
+     * The relationship between the role model.
+     *
+     * @return mixed Returns the relationship.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
 }

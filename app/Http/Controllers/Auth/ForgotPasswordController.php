@@ -11,4 +11,14 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 class ForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void Returns nothing.
+     */
+    public function __construct()
+    {
+        $this->middleware('https');
+    }
 }

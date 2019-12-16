@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * The password resets table.
+ * The api column.
  */
-class CreatePasswordResetsTable extends Migration
+class CreateApiTokenColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +16,8 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::table('users', function ($table) {
+            $table->string('api_token', 80)->after('password')->unique()->nullable()->default(null);
         });
     }
 
@@ -30,6 +28,8 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('api_token');
+        });
     }
 }

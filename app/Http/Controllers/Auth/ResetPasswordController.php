@@ -14,4 +14,14 @@ class ResetPasswordController extends Controller
 
     /** @var string $redirectTo Where to redirect users after resetting their password. */
     protected $redirectTo = '/home';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void Returns nothing.
+     */
+    public function __construct()
+    {
+        $this->middleware('https');
+    }
 }
