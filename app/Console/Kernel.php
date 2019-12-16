@@ -5,38 +5,31 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * The app console.
+ */
 class Kernel extends ConsoleKernel
 {
-    /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-        //
-    ];
+    /** @var array $commands The Artisan commands provided by your application. */
+    protected $commands = [];
 
     /**
      * Define the application's command schedule.
+     * 
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule The command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
+     * @return void Returns nothing.
      */
-    protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')
-        //          ->hourly();
-    }
+    protected function schedule(Schedule $schedule) { }
 
     /**
      * Register the commands for the application.
      *
-     * @return void
+     * @return void Returns nothing.
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
-
+        $this->load(__DIR__ . '/Commands');
         require base_path('routes/console.php');
     }
 }
