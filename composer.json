@@ -1,15 +1,13 @@
 {
-    "name": "laravel/laravel",
+    "name": "void-azure/laravel-apex",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
+    "description": "A secure by default authentication system built with laravel framework.",
+    "keywords": [],
     "license": "MIT",
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "laravel/cashier": "^10.5",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0"
     },
