@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Laravel\Cashier\Billable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 
 /**
  * The user model.
