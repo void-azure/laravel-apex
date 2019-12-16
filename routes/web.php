@@ -11,10 +11,25 @@
 |
 */
 
+// Landing page.
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Auth routes.
 Auth::routes(['verify' => true]);
 
+// Home route.
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Admin routes.
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
+    // User management route.
+    Route::resource('/users', 'UserController');
+
+    
+
+    // Impersonate routes.
+    Route::get('/impersonate/user/take/{id}', 'ImpersonateController@take')->name('impersonate.take');
+    Route::get('/impersonate/user/leave', 'ImpersonateController@leave')->name('impersonate.leave');
+});

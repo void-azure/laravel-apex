@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * The permission role table.
+ * The social login table.
  */
-class CreatePermissionRoleTable extends Migration
+class CreateSocialLoginsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +16,11 @@ class CreatePermissionRoleTable extends Migration
      */
     public function up()
     {
-        Schema::create('permission_role', function (Blueprint $table) {
+        Schema::create('social_logins', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('permission_id')->unsigned();
-            $table->integer('role_id')->unsigned();
+            $table->string('provider');
+            $table->string('provider_id');
+            $table->string('user_email')->unique();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreatePermissionRoleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('social_logins');
     }
 }
