@@ -1,18 +1,24 @@
 {
     "name": "void-azure/laravel-apex",
     "type": "project",
-    "description": "A secure by default authentication system built with laravel framework.",
+    "description": "A secure by default 4pc server built with laravel framework.",
     "keywords": [],
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "authy/php": "^3.0",
+        "beyondcode/laravel-websockets": "^1.3",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
+        "laravel-validation-rules/colour": "^1.1",
+        "laravel-validation-rules/country-codes": "^2.0",
+        "laravel-validation-rules/phone": "^1.3",
         "laravel/cashier": "^10.5",
         "laravel/framework": "^6.2",
         "laravel/scout": "^7.2",
         "laravel/socialite": "^4.3",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "pusher/pusher-php-server": "~3.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

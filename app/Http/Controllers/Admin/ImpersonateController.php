@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 /**
@@ -37,13 +36,13 @@ class ImpersonateController extends Controller
     {
         $user = User::where('id', $id)->first();
         if (!$user) {
-            return redirect()->route('admin.users.index')->with('warning', trans('flash.user_does_not_exist'));
+            return redirect()->route('admin.users.index');
         } elseif ($user->hasRole('admin')) {
-            return redirect()->route('admin.users.index')->with('warning', trans('flash.user_is_admin'));
+            return redirect()->route('admin.users.index');
         } else {
             session()->put('impersonate', $user->id);
         }
-        return redirect()->to($this->redirectTo)->with('success', trans('flash.impersonate_take'));
+        return redirect()->to($this->redirectTo)->with('status', trans('flash.impersonate_take'));
     }
 
     /**
@@ -54,6 +53,6 @@ class ImpersonateController extends Controller
     public function leave()
     {
         session()->forget('impersonate');
-        return redirect()->route('admin.users.index')->with('warning', trans('flash.impersonate_leave'));
+        return redirect()->route('admin.users.index')->with('status', trans('flash.impersonate_left'));
     }
 }

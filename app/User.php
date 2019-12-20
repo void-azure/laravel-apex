@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /** @var array $fillable The attributes that are mass assignable. */
     protected $fillable = [
-        'name', 'email', 'rating', 'username', 'password',
+        'name', 'email', 'rating', 'username', 'password', 'two_factor', 'phone_number', 'authy_id',,
     ];
 
     /** @var array $hidden The attributes that should be hidden for arrays. */
@@ -38,6 +38,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles()
     {
         return $this->belongsToMany('App\Role');
+    }
+
+    /**
+     * The relationship between the message model.
+     *
+     * @return mixed Returns the relationship.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Message');
     }
 
     /**

@@ -18,6 +18,7 @@ class HomeController extends Controller
     {
         $this->middleware('https');
         $this->middleware('auth');
+        $this->middleware('impersonate');
     }
 
     /**
