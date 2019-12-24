@@ -35,11 +35,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     Route::get('/impersonate/user/leave', 'ImpersonateController@leave')->name('impersonate.leave');
 });
 
-// Two-Factor auth routes.
-Route::get('/two-factor/verify', 'VerifyController@index')->name('twofactor.index');
-Route::post('/two-factor/verify/process', 'VerifyController@verify')->name('twofactor.verify');
-
-// Chat routes.
-Route::get('/rooms/{id}', 'ChatController@index')->name('chat.index');
-Route::get('/rooms/messages/{id}', 'ChatController@fetchMessages')->name('chat.messages');
-Route::post('/rooms/messages/send/{id}', 'ChatsController@sendMessage')->name('chat.messages.send');
+// 2 factor auth routes.
+Route::get('/two-factor/verify', 'TwoFactorController@show2faForm');
+Route::post('/two-factor/verify', 'TwoFactorController@verifyToken');

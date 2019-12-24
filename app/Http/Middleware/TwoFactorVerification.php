@@ -5,9 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 
 /**
- * The admin check middleware.
+ * The two factor verify middleware.
  */
-class AdminCheck
+class TwoFactorVerification
 {
     /**
      * Handle an incoming request.
@@ -19,9 +19,9 @@ class AdminCheck
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->hasRole('admin')) {
-            return redirect()->route('home');
+        if (session()->has('tf.session')) {
+            return $next($request);
         }
-        return $next($request);
+        return redirect('/two-factor/verify');
     }
 }

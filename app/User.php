@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Cashier\Billable;
 use Laravel\Scout\Searchable;
 
 /**
@@ -13,7 +12,7 @@ use Laravel\Scout\Searchable;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, Billable, Searchable;
+    use Notifiable, Searchable;
 
     /** @var array $casts The attributes that should be cast to native types. */
     protected $casts = [
@@ -22,14 +21,25 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /** @var array $fillable The attributes that are mass assignable. */
     protected $fillable = [
-        'name', 'email', 'rating', 'username', 'password', 'two_factor', 'phone_number', 'authy_id',,
+        'name', 'email', 'username', 'password', 'phone_number', 'two_factor', 'two_factor_code', 'two_factor_expiry',
     ];
 
     /** @var array $hidden The attributes that should be hidden for arrays. */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'two_factor_code', 'remember_token',
     ];
 
+    /**
+     * Route notifications for the Nexmo channel.
+     *
+     * @param \Illuminate\Notifications\Notification $notification The notification channel.
+     *
+     * @return string Returns the phone number.
+     */
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->phone_number;
+    }
     /**
      * The relationship between the role model.
      *
@@ -38,16 +48,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles()
     {
         return $this->belongsToMany('App\Role');
-    }
-
-    /**
-     * The relationship between the message model.
-     *
-     * @return mixed Returns the relationship.
-     */
-    public function roles()
-    {
-        return $this->belongsToMany('App\Message');
     }
 
     /**

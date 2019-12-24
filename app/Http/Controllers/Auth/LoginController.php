@@ -40,12 +40,9 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->two_factor) {
-            $authy_api = new AuthyApi(getenv("AUTHY_SECRET"));
-            $authy_api->requestSms($user->authy_id);
-            session(['isVerified' => false]);
             return redirect('/two-factor/verify');
         }
-        session(['isVerified' => true]);
+        session()->put('tf.session', true);
         return redirect()->to($this->redirectTo);
     }
 
